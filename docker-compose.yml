@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fieldproof-web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/prisma/dev.db
+      - JWT_SECRET=fieldproof-production-enterprise-secret-key-32-chars-long
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    volumes:
+      - sqlite_data:/app/prisma
+    networks:
+      - fieldproof-network
+
+volumes:
+  sqlite_data:
+    driver: local
+
+networks:
+  fieldproof-network:
+    driver: bridge
