@@ -5,8 +5,11 @@ const nextConfig = {
     unoptimized: true,
   },
   experimental: {
-    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs', 'jspdf']
-  }
+    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs', 'jspdf'],
+    outputFileTracingIncludes: {
+      '/**/*': ['./prisma/dev.db'],
+    },
+  },
 };
 
 export default nextConfig;

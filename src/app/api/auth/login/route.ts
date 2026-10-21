@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('Login error:', error);
     return NextResponse.json(
-      { error: 'Internal server error during authentication' },
+      { error: error?.message ? `Authentication error: ${error.message}` : 'Internal server error during authentication' },
       { status: 500 }
     );
   }
